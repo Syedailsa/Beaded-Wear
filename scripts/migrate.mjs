@@ -96,4 +96,4 @@ async function migrateData() {
   }
 }
 
-// migrateData();
+migrateData();
