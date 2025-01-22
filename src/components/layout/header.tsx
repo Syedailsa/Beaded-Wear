@@ -1,20 +1,28 @@
-import React from "react";
-import { Link as ScrollLink, Element } from "react-scroll";
+'use client'
+
+import React, { useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import {FiShoppingBag} from 'react-icons/fi'
+import Cart from './cart';
+import { CartContext } from '../../app/context/CartContext';
 
 export default function Header() {
+
+  const {totalQuantity, showCart, setShowCart}:any = useContext(CartContext);
+  
+  const handleCick = () => {
+    setShowCart(!showCart)
+  }
+
   return (
-    <header className="">
-      <Element
-        name="top"
-        className="overflow-hidden rounded-[6px] top-5 sticky md:mx-auto z-50 
+    <div className='overflow-clip inset-0 -z-10 h-full w-full bg-[#fafafa] bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] pb-6'>
+        <header className="overflow-hidden rounded-[6px] top-5 md:mx-auto z-50 
         xl:w-4/5 2xl:w-[68%] bg-[#d4e3ff] flex items-center 
-        justify-between py-4 px-4 md:px-6 mx-6"
-      >
+        justify-between py-4 px-4 md:px-6 mx-6">
         <Link href={"/"}>
           <Image
-            src={"/cover.png"}
+            src={"/Logo.png"}
             alt="Logo"
             width={500}
             height={500}
@@ -26,33 +34,28 @@ export default function Header() {
             <Link href={"/"} className="hover:text-blue-500">
               Home
             </Link>
-
-            <ScrollLink
-              to="/about"
-              smooth={true}
-              className="hover:text-blue-500"
-            >
-              About
-            </ScrollLink>
-
-            <ScrollLink
-              to="products"
-              smooth={true}
-              className="hover:text-blue-500"
-            >
-              Product
-            </ScrollLink>
-
-            <ScrollLink
-              to="contact"
-              smooth={true}
-              className="hover:text-blue-500"
-            >
-              Contact
-            </ScrollLink>
+            <Link href={"/about"} className="hover:text-blue-500">
+            About
+            </Link>
+            <Link href={"/productsList"} className="hover:text-blue-500">
+            Product
+            </Link>
+            <Link href={'/categories'} className="hover:text-blue-500">
+               Category
+              </Link>
+            <Link href={"/contact"} className="hover:text-blue-500">
+            Contact
+            </Link>
           </div>
         </div>
-      </Element>
-    </header>
+        <button className='cart-icon' onClick={handleCick}>
+                <FiShoppingBag />
+                <span className='cart-item-qty'>{totalQuantity}</span>
+        </button>
+    </header>  
+
+    {showCart && <Cart />}
+    </div>
+
   );
 }

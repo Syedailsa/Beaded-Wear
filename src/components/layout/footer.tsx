@@ -4,12 +4,12 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-  <footer className="text-gray-600 body-font bg-[#d4e3ff] ">
+  <footer className="text-gray-600 body-font bg-[#d4e3ff]">
     <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
       <div className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
       <Link href={"/"}>
           <Image
-            src={"/cover.png"}
+            src={"/Logo.png"}
             alt="Logo"
             width={500}
             height={500}
