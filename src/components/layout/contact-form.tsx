@@ -15,6 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { client } from '@/sanity/lib/client'
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'must be at least 2 characters' }).max(50),
@@ -33,11 +34,24 @@ function ContactForm() {
         }
     })
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
+
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+      try {
+        await client.create({
+          _type: "contactForm",
+          name: values.name,
+          email: values.email,
+          message: values.message,
+        });
+  
+        // Reset the form after successful submission
+        form.reset();
+        alert("Message submitted successfully!");
+      } catch (error) {
+        console.error("Error submitting the form:", error);
+        alert("Failed to submit the message. Please try again.");
       }
+    }
 
   return (
     <Form {...form}>
@@ -51,7 +65,7 @@ function ContactForm() {
               <FormItem className="">
                 <FormLabel className="block text-sm font-semibold">Name<span className="text-red-600"> *</span></FormLabel>
                 <FormControl>
-                  <Input placeholder="name" {...field} className="w-full mt-1 p-3 bg-themeblack text-themewhite rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500" />
+                  <Input placeholder="name" {...field} className="w-full mt-1 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -64,7 +78,7 @@ function ContactForm() {
               <FormItem className="">
                 <FormLabel className="block text-sm font-semibold">Email<span className="text-red-600"> *</span></FormLabel>
                 <FormControl>
-                  <Input placeholder="abc@gmail.com" {...field} className="w-full mt-1 p-3 bg-themeblack text-themewhite rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500" />
+                  <Input placeholder="abc@gmail.com" {...field} className="w-full mt-1 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -79,7 +93,7 @@ function ContactForm() {
               <FormItem>
                 <FormLabel className="block text-sm font-semibold">Message</FormLabel>
                 <FormControl>
-                  <textarea placeholder="message" {...field} className="p-4 w-full text-white rounded-xl" />
+                  <textarea placeholder="message" {...field} className="p-4 w-full rounded-xl" />
                 </FormControl>
                 <FormMessage />
               </FormItem>

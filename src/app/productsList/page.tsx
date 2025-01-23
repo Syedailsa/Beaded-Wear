@@ -13,29 +13,21 @@ const urlFor = (source: any) => builder.image(source);
 const Products = () => {
   const [products, setProducts] = useState<any[]>([]);
 
+
   useEffect(() => {
     const fetchProducts = async () => {
-      const query = `
-        *[_type == "product"]{
-          name,
-          "imageUrl": image.asset->url,
-          price,
-          category->{
-            name
-          },
-          slug {
-            current
-          }
+      try {
+        const response = await fetch("/api/products"); // Updated to use the API route
+        if (!response.ok) throw new Error("Failed to fetch products");
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error("Error fetching products:", error.message);
+        } else {
+          console.error("Error fetching products:", error);
         }
-      `;
-      const result = await client.fetch(query);
-      // Sort products by category name
-      const sortedProducts = result.sort((a: any, b: any) =>
-        a.category.name
-          .toLowerCase()
-          .localeCompare(b.category.name.toLowerCase())
-      );
-      setProducts(sortedProducts);
+      }
     };
 
     fetchProducts();
