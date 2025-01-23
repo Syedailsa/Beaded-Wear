@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/sanity/lib/client";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Loader from "@/components/layout/loader";
 
@@ -46,8 +45,6 @@ const Products = () => {
     return <Loader/>;
   }
 
-  const router = useRouter();
-
   return (
     <div className="overflow-clip inset-0 -z-10 h-full w-full bg-[#fafafa] bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]">
       <h1 className="font-bold text-3xl lg:text-5xl ml-3 lg:py-11 ">
@@ -60,9 +57,10 @@ const Products = () => {
             href={`/products/${product.slug.current}`}
             passHref
             className="text-black font-bold "
+            key={product.slug.current}
           >
             <div
-              key={product.slug.current}
+              
               className="border p-4 xl:h-[370px] w-full xl:w-[420px] hover:shadow-teal-600 hover:cursor-pointer rounded shadow hover:shadow-md bg-blue-50"
             >
               {/* Category */}

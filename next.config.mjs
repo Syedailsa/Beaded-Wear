@@ -1,14 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    // webpack: (config) => {
-    //     config.cache = false;
-    //     return config;
-    //   },
       images: {
-        domains: ['cdn.sanity.io'], // Adding Sanity's CDN domain 
+        domains: ['cdn.sanity.io'],
       },  
       eslint: {
-        ignoreDuringBuilds: true, // Disables ESLint during builds
+        ignoreDuringBuilds: true, 
       },
 };
 

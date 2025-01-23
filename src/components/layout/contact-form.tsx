@@ -51,7 +51,7 @@ function ContactForm() {
               <FormItem className="">
                 <FormLabel className="block text-sm font-semibold">Name<span className="text-red-600"> *</span></FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} className="w-full mt-1 p-3 bg-themeblack text-themewhite rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500" />
+                  <Input placeholder="name" {...field} className="w-full mt-1 p-3 bg-themeblack text-themewhite rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
