@@ -29,7 +29,6 @@ function Product({ params }: { params: { slug: string } }) {
   const { cartItems, addProduct, qty, decQty, incQty }: any =
     useContext(CartContext);
 
-  // Fetch product data using useEffect
   useEffect(() => {
     const fetchProduct = async () => {
       try {
