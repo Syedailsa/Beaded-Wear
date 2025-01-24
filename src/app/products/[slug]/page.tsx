@@ -33,33 +33,23 @@ function Product({ params }: { params: { slug: string } }) {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const query = `*[_type == "product" && slug.current == $slug][0]{
-          _id,
-          name,
-          category,
-          "imageUrl": image.asset->url,
-          price
-        }`;
-
-        const fetchedProduct: Product | null = await client.fetch(query, {
-          slug: params.slug,
-        });
-
-        if (!fetchedProduct) {
-          notFound();
-        } else {
-          setProduct(fetchedProduct);
+        const response = await fetch(`/api/products/${params.slug}`);
+        if (!response.ok) {
+          throw new Error("Product not found");
         }
+        const fetchedProduct: Product = await response.json();
+        setProduct(fetchedProduct);
       } catch (error) {
         console.error("Error fetching product:", error);
+        notFound();
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchProduct();
   }, [params.slug]);
-
+  
   // Handle loading state
   if (loading) {
     <Loader />;
