@@ -1,0 +1,18 @@
+Test Case ID,Description,Steps,Expected Result,Actual Result,Status,Severity,Remarks
+TC001,                 ,"Click on ""Add to Cart"" button",Product added to cart successfully,Works as expected,Passed,Low,No issues found
+,Add product to cart,,,,,,
+,API error handling,Disconnect API,,Worked as expected,Passed,Low,great
+,,,Fallback error shown “error fetching product: _”,,,,
+TC002,,,,,,,
+TC003,Contact form validation,Submit form without email,"""Email is required"" message shown",Form shows correct error message,Passed,Low,Validation
+,,,,,,,successful
+,Categories,,Show products of the desired category,Showed products of the specific category,Passed,Low,Works as expected
+TC004,,When clicked shows product related to category,,,,,
+,Product Listing,,Show all products available,Showed all products,Passed,Low,Takes 1 mint to load
+TC005,,Shows All Products,,,,,
+,Hamburger,Show on small screens act as navbar,,Acted as navbar on small screens,Passed,Low,Worked as expected
+TC006,,,"Open and close, and navigate through pages",,,,
+,,Click on “Shop Now” button,Open Products List page,Opened products list page,Passed,Low,No issue
+TC007,Shop Now button on home page,,,,,,
+,,All API calls Should be secure,All API calls should use HTTPS,,Passed,Low,Working fine
+TC008,Security,,,All API calls are secure and use HTTPS,,,
