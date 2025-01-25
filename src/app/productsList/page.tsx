@@ -5,6 +5,7 @@ import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/sanity/lib/client";
 import Link from "next/link";
 import Loader from "@/components/layout/loader";
+import Image from "next/image";
 
 const builder = imageUrlBuilder(client);
 
@@ -62,11 +63,14 @@ const Products = () => {
 
               {/* Image */}
 
-              <img
-                src={urlFor(product.imageUrl).url()}
-                alt={product.name}
-                className="w-full h-48 xl:h-[220px] xl:w-[300px] mx-auto object-cover rounded my-4"
-              />
+              <div className="relative w-[200px] h-48 xl:h-[220px] xl:w-[300px] mx-auto my-4">
+                <Image
+                  src={urlFor(product.imageUrl).url()}
+                  alt={product.name}
+                  fill
+                  className="object-cover rounded"
+                />
+              </div>
 
               <div>
                 {/* Name */}

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import imageUrlBuilder from "@sanity/image-url";
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 // Initialize image URL builder
 const builder = imageUrlBuilder(client);
@@ -76,11 +77,14 @@ async function CategoryProducts({ params }: { params: { slug: string } }) {
                 passHref
                 className="text-black font-bold "
               >
-                <img
+              <div className="relative h-52 md:h-48 w-full">
+                <Image
                   src={urlFor(product.image)}
                   alt={product.name}
-                  className="h-48 w-full object-cover"
+                  fill
+                  className="object-cover"
                 />
+              </div>
               
               <div className="p-4">
                 {/* Product Name */}

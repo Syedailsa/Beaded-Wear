@@ -1,6 +1,7 @@
 import { client } from "@/sanity/lib/client";
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export const revalidate = 60; // Revalidate data every 60 seconds
 
@@ -39,7 +40,9 @@ async function Categories() {
                 passHref
                 className="text-black font-bold "
               >
-                <img
+                <Image
+                  width={300}
+                  height={250}
                   src={category.imageUrl}
                   alt={category.name}
                   className="sm:w-[300px] md:w-full sm:h-[300px] md:h-[250px] xl:h-[340px] md:object-cover"
