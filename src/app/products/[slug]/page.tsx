@@ -56,7 +56,7 @@ function Product({ params }: { params: { slug: string } }) {
 
   // Handle product not found
   if (!product) {
-    return null;
+    return <Loader/>;
   }
 
   return (
